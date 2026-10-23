@@ -1,0 +1,59 @@
+SUMBER TEMPLATE JURNAL JEMT — BACA INI DULU
+============================================
+
+JANGAN cari backup template JEMT di folder lain. Yang resmi HANYA ini:
+
+  Lokasi VPS  : /opt/data/jemt-template
+  Repo Git    : https://github.com/PaculDigital/ojs-jemt-template
+  Branch      : main
+
+Update terakhir: 23 Oktober 2026
+  commit CSS  : 0ca8d4926fe65f507b7ea98a21d4b5d2  (31.403 byte)
+  commit TPL  : e9434581e0a11adee14411ea1ddecc27  (144 baris)
+
+Dokumentasi lengkap: BACKUP-TEMPLATE-JEMT.md di dalam folder/repo tersebut.
+
+CARA PAKAI
+----------
+  cd /opt/data/jemt-template
+  git pull                                  # ambil versi terbaru
+  bash install.sh                           # pasang ke container OJS
+  bash verify.sh                            # cek semua aset HTTP 200
+
+CARA CEK VPS MASIH SAMA DENGAN GIT
+----------------------------------
+  md5sum /opt/data/jemt-template/public/journals/1/styleSheet.css
+  # harus: 0ca8d4926fe65f507b7ea98a21d4b5d2
+
+  docker exec ojs-ojs_web-1 md5sum /var/www/ojs/public/journals/1/styleSheet.css
+  # harus sama
+
+YANG SUDAH DIHAPUS (23 Okt 2026) — JANGAN DIPAKAI LAGI
+-------------------------------------------------------
+  /home/ubuntu/jemt_custom_backup_20260820_173913          CSS 23.965 B (terlama)
+  /home/ubuntu/jemt_custom_backup_final_20260820_184854    CSS 29.649 B (usang)
+  /home/ubuntu/jemt_template_package_20260821_024355       CSS 29.649 B (usang)
+  /home/ubuntu/jemt_template_package_20260821_024355.tar.gz
+  /opt/data/ojs-jemt-work                                  CSS 29.649 B (usang)
+  /opt/data/jemt-export.tar
+  volume docker: jemt-export, jemt-peek
+
+Semua folder di atas berisi CSS versi LAMA. Kalau dipakai, tampilan JEMT
+akan kembali rusak (header dobel / judul terpotong). Sumbernya sekarang Git.
+
+CATATAN DESAIN (jangan diubah tanpa tahu akibatnya)
+---------------------------------------------------
+1. Header dan hero adalah DUA GAMBAR TERPISAH:
+   - header_banner.png  -> background .pkp_structure_head (full width, sudut kotak)
+   - hero_2026.webp     -> <img> di div.homepage_image (kartu, sudut membulat)
+   JANGAN dipindah atau disatukan.
+
+2. JANGAN set useHomepageImageAsHeader = 1 di plugin_settings.
+   Itu membuat banner bertumpuk (header dobel).
+
+3. JANGAN pakai background-size: cover untuk header_banner.png.
+   Pakai 100% auto supaya tidak ter-crop.
+
+4. Judul jurnal sudah menyatu di dalam gambar hero_2026.webp.
+   Teks HTML-nya transparan via .pkp_site_name a.is_text { color: transparent }.
+   Jangan hapus aturan itu.
