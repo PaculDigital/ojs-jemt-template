@@ -1,0 +1,1244 @@
+/* ===== Fonts self-hosted ===== */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/public/journals/1/fonts/inter-400.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/public/journals/1/fonts/inter-700.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Jakarta';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/public/journals/1/fonts/jakarta-600.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Jakarta';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/public/journals/1/fonts/jakarta-800.woff2') format('woff2');
+}
+
+/* Body: Inter */
+body {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Heading: Jakarta */
+h1, h2, h3, h4, h5, h6,
+.pkp_block .title,
+.page_title,
+.cmp_article_details h1,
+.obj_article_details h1,
+.issue_title,
+.pkp_site_name,
+.head-menu a {
+    font-family: 'Jakarta', 'Inter', sans-serif !important;
+}
+
+/* Kanvas luar kartu: gradasi + glow oranye/navy langsung di body */
+html {
+    background-color: #f6f8fb;
+    background-image:
+        radial-gradient(circle at 92% 92%, rgba(84,152,247,0.30) 0%, rgba(84,152,247,0) 44%),
+        radial-gradient(circle at 8% 5%, rgba(255,146,0,0.16) 0%, rgba(255,146,0,0) 38%),
+        linear-gradient(180deg, #ffffff 0%, #f2f6fc 55%, #edf2fb 100%);
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+}
+
+body {
+    background-color: transparent;
+}
+
+/* Pattern kecil di atas canvas, menyeluruh layar, di-blur */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("/public/journals/1/pat_04.png");
+    background-repeat: repeat;
+    background-size: 80px 80px;
+    filter: blur(0.5px);
+    opacity: 0.30;
+}
+
+/* Kotak tengah tidak selebar layar, serupa JPEM */
+.pkp_structure_page {
+    max-width: 1400px;
+    margin: 20px auto !important;
+    box-shadow: 0 0 18px rgba(22,38,61,0.18);
+}
+
+/* Lebarkan konten & footer mengikuti lebar header (satu kolom lurus) */
+.pkp_structure_content,
+.pkp_structure_footer,
+.pkp_head_wrapper,
+.pkp_site_name_wrapper,
+.pkp_navigation_primary_wrapper {
+    max-width: 1400px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Layout 2-kolom (main + sidebar) hanya untuk desktop */
+@media (min-width: 992px) {
+    /* Navigasi user (Daftar/Login) melayang di kanan atas — potong overlay */
+    .pkp_navigation_user_wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: auto;
+        transform: none;
+        text-align: right;
+    }
+
+    .pkp_navigation_user {
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        justify-content: flex-end;
+    }
+
+    .pkp_navigation_user > li {
+        display: inline-block;
+        float: none;
+    }
+
+    /* Nav menu jangan menempel tepian header.
+       Formula: posisikan glass bar tepat menempel di bawah banner header,
+       menyesuaikan lebar layar (banner memakai background-size 100% auto). */
+    .pkp_navigation_primary_row {
+        padding-top: calc(min(100vw, 1400px) * 0.1538 - 90px);
+    }
+
+    .pkp_navigation_primary_wrapper {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Main content membentang mengisi sisa setelah sidebar (default theme 652px tetap) */
+    .pkp_structure_main {
+        width: calc(100% - 300px) !important;
+        float: left;
+    }
+
+    /* Matikan garis vertikal default theme (position fixed kiri/kanan) */
+    .pkp_structure_main:before,
+    .pkp_structure_main:after {
+        content: none !important;
+        display: none !important;
+    }
+
+    .pkp_structure_sidebar {
+        width: 300px;
+        float: right;
+    }
+}
+
+/* Hero placeholder */
+.pkp_structure_head {
+    background-color: #16263D;
+}
+
+/* Banner strip penuh (1300x200) sebagai latar header */
+.pkp_structure_head {
+    background-image: url("/public/journals/1/header_banner.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
+    min-height: 215px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Dropdown nav jangan terpotong (desktop only — di mobile menu jadi drawer penuh) */
+@media (min-width: 992px) {
+    .pkp_structure_head {
+        z-index: 1100;
+    }
+    .pkp_site_nav_menu {
+        position: relative;
+        z-index: 1200;
+    }
+}
+
+/* Primary nav: font & spacing */
+.pkpnavigationprimary,
+#navigationPrimary,
+.pkp_navigation_primary {
+    font-family: 'Jakarta', 'Inter', sans-serif !important;
+}
+
+.pkpnavigationprimary > li > a,
+#navigationPrimary > li > a,
+.pkp_navigation_primary > li > a {
+    font-family: 'Jakarta', 'Inter', sans-serif !important;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
+    padding: 5px 12px;
+    border-radius: 9px;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+}
+
+/* Underline oranye menyala saat hover */
+#navigationPrimary > li > a::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0;
+    margin: 3px auto 0;
+    background: #FF9200;
+    border: none !important;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+#navigationPrimary > li > a:hover::after {
+    width: 100%;
+}
+
+#navigationPrimary > li > a:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(22, 38, 61, 0.35);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Khusus item yang punya submenu (Tentang Kami): jangan terangkat saat hover,
+   agar teksnya tetap sejajar dengan item lain dan underline tak menggesernya */
+#navigationPrimary > li:has(> ul) > a:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Matikan caret panah default tema ([aria-haspopup]:after) pada item bersubmenu,
+   supaya tidak ada garis putih/oranye saat tampilan normal dan teks tak terangkat */
+#navigationPrimary > li:has(> ul) > a::after,
+#navigationPrimary > li[aria-haspopup] > a::after {
+    border: none !important;
+}
+
+/* Sejajarkan item bersubmenu (Tentang Kami): default vertical-align baseline
+   membuat li yang berisi <ul> tersarang tampak naik ~10px. Align bottom = sejajar dengan item lain */
+#navigationPrimary > li:has(> ul),
+#navigationPrimary > li[aria-haspopup] {
+    vertical-align: bottom;
+}
+
+/* Submenu "Tentang Kami" juga Jakarta */
+#navigationPrimary ul li a {
+    font-family: 'Jakarta', 'Inter', sans-serif !important;
+    font-weight: 600;
+}
+
+/* Submenu dropdown glass — timpa offset default 40px agar menempel ke item */
+@media (min-width: 992px) {
+    #navigationPrimary > li {
+        position: relative;
+    }
+
+    #navigationPrimary > li > ul {
+        display: none;
+        position: absolute;
+        top: calc(100% - 2px);
+        left: 0;
+        margin: 0;
+        transform: translate3d(0, 0, 0) !important;
+        backdrop-filter: blur(14px) saturate(150%);
+        -webkit-backdrop-filter: blur(14px) saturate(150%);
+        background: rgba(30, 56, 97, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 12px;
+        box-shadow: 0 14px 30px rgba(22, 38, 61, 0.4);
+        padding: 10px 8px;
+        min-width: 230px;
+        z-index: 1300;
+    }
+
+    #navigationPrimary > li:hover > ul,
+    #navigationPrimary > li:focus-within > ul {
+        display: block;
+    }
+
+    #navigationPrimary > li > ul li a {
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    #navigationPrimary > li > ul li a:hover {
+        background: rgba(255, 146, 0, 0.22);
+        color: #fff;
+        padding-left: 16px;
+    }
+}
+
+.pkp_site_name_wrapper,
+.pkp_site_name_wrapper .pkp_site_name a {
+    background-color: transparent !important;
+}
+
+/* Sembunyikan teks nama jurnal di header (banner sudah memuat judul) */
+.pkp_site_name a.is_text {
+    color: transparent !important;
+    text-shadow: none !important;
+}
+
+.pkp_structure_head .pkp_site_nav_menu {
+    background-color: transparent;
+}
+
+.pkp_site_name_wrapper,
+.pkp_site_name_wrapper .pkp_site_name a,
+.pkp_navigation_primary a {
+    color: #fff;
+}
+.homepage_image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.pkp_structure_content {
+    background: #ffff;
+}
+
+.pkp_site_name_wrapper {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.pkp_site_name {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.pkp_site_name > a {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.pkp_site_name .is_img img {
+    max-height: 200px !important;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Warna jurnal */
+.page_title { color: #16263D; }
+.name { color: #16263D; }
+h1, h2, h2:not(.title) { color: #16263D; }
+a { color: #16263D; }
+a:hover { color: #FF9200; }
+
+.cmp_button_wire,
+.obj_galley_link {
+    background: #16263D;
+    border: 1px solid #16263D;
+    color: #fff;
+}
+
+.obj_article_summary {
+    border: 1px solid #16263D;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 3px #16263D;
+}
+
+.obj_article_details .abstract { text-align: justify; }
+
+/* Header navigasi — Glassmorphism biru (kaca es) pada baris menu saja */
+.pkp_structure_head .pkp_site_nav_menu {
+    background: transparent !important;
+}
+
+.pkp_structure_head .pkp_navigation_primary_wrapper {
+    background-image: linear-gradient(
+        to right,
+        rgba(30, 56, 97, 0.55) 0%,
+        rgba(46, 74, 122, 0.45) 45%,
+        rgba(30, 56, 97, 0.55) 100%
+    );
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 8px 26px rgba(22, 38, 61, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 2px 8px;
+}
+
+/* Sidebar blocks */
+.pkp_block .title {
+    display: block;
+    padding: 12px 14px;
+    text-align: left;
+    background: linear-gradient(135deg, #16263D 0%, #2e4a7a 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 3px solid #FF9200;
+}
+
+.head-menu {
+    height: auto;
+    border-bottom: 0;
+    margin: 0;
+}
+
+.head-menu a {
+    display: block;
+    padding: 12px 14px;
+    text-align: left;
+    background: linear-gradient(135deg, #16263D 0%, #2e4a7a 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 3px solid #FF9200;
+}
+
+.menu-sidebar {
+    font: bold 12px arial, verdana, sans-serif;
+}
+
+.menu-sidebar li a {
+    text-decoration: none;
+    border: 1px solid #16263D;
+    color: #16263D;
+    display: block;
+    background-color: #F8F8F8;
+    padding: 10px;
+    margin-top: 0;
+    transition: 0.3s;
+}
+
+.menu-sidebar li a:hover {
+    background-color: #16263D;
+    box-shadow: gray 2px 2px 2px;
+    color: white;
+    border-left: 5px solid #FF9200;
+    border-bottom: 5px solid #FF9200;
+}
+
+.menu-sidebar ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+}
+
+.badan a {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid white;
+    background: #F8F8F8;
+    text-align: center;
+    transition: 0.5s;
+    color: black;
+}
+
+.badan { margin-top: 0; }
+
+/* Semua isi blok rata kiri bawah tepat di bawah header (tanpa gap) */
+.pkp_block .content {
+    padding-top: 0 !important;
+}
+
+.pkp_block .content ul {
+    margin: 0;
+    padding: 0;
+}
+
+.badan a:hover {
+    color: black !important;
+    font-weight: bold;
+    box-shadow: gray 0px 5px 10px 0px;
+    position: relative;
+}
+
+/* Most read */
+.most_read_article {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #16263D;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s;
+}
+
+.most_read_article:hover { background-color: #e6e6e6; }
+.most_read_article_title a { color: #16263D; text-decoration: none; }
+.most_read_article_journal { color: #16263D; font-size: 0.9em; }
+
+/* Tombol Daftar/Login di sidebar */
+#customblock-user-menu {
+    text-align: center;
+    padding: 0.35rem 0.5rem !important;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.auth-buttons .btn-gradient {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: #fff !important;
+    background: linear-gradient(135deg, #16263D 0%, #2e4a7a 100%);
+    box-shadow: 0 3px 8px rgba(22,38,61,0.3);
+    transition: all 0.3s ease;
+    flex: 0 1 auto;
+    min-width: 114px;
+}
+
+.auth-buttons .btn-gradient:hover,
+.auth-buttons .btn-gradient:focus {
+    background: linear-gradient(135deg, #ff9200 0%, #ff7b00 100%);
+    box-shadow: 0 5px 14px rgba(255,146,0,0.4);
+    transform: translateY(-2px);
+    color: #fff !important;
+}
+
+.auth-buttons .btn-login {
+    background: linear-gradient(135deg, #ff9200 0%, #ff7b00 100%);
+    box-shadow: 0 3px 8px rgba(255,146,0,0.3);
+}
+
+.auth-buttons .btn-login:hover,
+.auth-buttons .btn-login:focus {
+    background: linear-gradient(135deg, #16263D 0%, #2e4a7a 100%);
+    box-shadow: 0 5px 14px rgba(22,38,61,0.4);
+}
+
+/* Rapatkan blok main-menu bagian atas ke tombol */
+#customblock-main-menu {
+    padding-top: 1.5rem !important;
+    margin-top: 0 !important;
+}
+
+/* Naikkan sidebar tombol Daftar/Login mendekati header */
+@media (min-width: 992px) {
+    .pkp_structure_sidebar {
+        margin-top: -1.5rem;
+    }
+}
+
+/* Sembunyikan nav user bawaan di header (Daftar/Login pindah ke sidebar) — desktop only */
+@media (min-width: 992px) {
+    .pkp_navigation_user_wrapper {
+        display: none !important;
+    }
+}
+
+/* Naikkan sedikit section Chat Us & Journal Template di sidebar */
+#customblock-chat-us {
+    margin-top: -1.5rem;
+}
+
+#customblock-journal-template {
+    margin-top: -1.5rem;
+}
+
+#customblock-recomended-tool {
+    margin-top: -1.5rem;
+}
+
+/* Rapatkan gambar Recommended Tool: tanpa padding atas/bawah, tanpa garis pemisah */
+#customblock-recomended-tool .badan {
+    margin: 0;
+}
+
+#customblock-recomended-tool .badan a {
+    padding: 2px 0;
+    border-bottom: none;
+    background: transparent;
+}
+
+/* Hilangkan border/gap pada gambar E-ISSN, Chat Us, Journal Template */
+#customblock-main-menu .badan,
+#customblock-chat-us .badan,
+#customblock-journal-template .badan {
+    margin: 0;
+}
+
+#customblock-main-menu .badan a,
+#customblock-chat-us .badan a,
+#customblock-journal-template .badan a {
+    padding: 2px 0;
+    border-bottom: none;
+    background: transparent;
+    border-radius: 14px;
+}
+
+/* Rounded sudut gambar sidebar untuk memotong garis hitam rounded di tepi gambar asli */
+#customblock-main-menu .badan img,
+#customblock-chat-us .badan img,
+#customblock-journal-template .badan img,
+#customblock-recomended-tool .badan img {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Hover ikut rounded (box-shadow pada a harus ikut border-radius) */
+#customblock-main-menu .badan a:hover,
+#customblock-chat-us .badan a:hover,
+#customblock-journal-template .badan a:hover,
+#customblock-recomended-tool .badan a:hover {
+    border-radius: 14px;
+}
+
+#customblock-visitors {
+    margin-top: -1.5rem;
+}
+
+/* Hilangkan background abu-abu & padding di section Visitors */
+#customblock-visitors .badan {
+    margin: 0;
+}
+
+#customblock-visitors .badan a {
+    padding: 2px 0;
+    border-bottom: none;
+    background: transparent;
+    border-radius: 14px;
+}
+
+#customblock-visitors .badan a:hover {
+    border-radius: 14px;
+}
+
+.block_language {
+    margin-top: -1.5rem;
+}
+
+.block_information {
+    margin-top: -1.5rem;
+}
+
+/* For Readers / For Authors / For Librarians — rata tengah & tebal */
+.block_information .content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.block_information .content ul li {
+    text-align: center;
+    margin: 0;
+    padding: 6px 0;
+}
+
+.block_information .content ul li a {
+    font-family: 'Jakarta', 'Inter', sans-serif;
+    font-weight: 800;
+    color: #16263d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.block_information .content ul li a:hover {
+    color: #ff9200;
+}
+
+/* Tampilkan pilihan bahasa dalam satu baris: English | Indonesia */
+.block_language .content ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.block_language .content ul li {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.block_language .content ul li + li::before {
+    content: "|";
+    margin-right: 10px;
+    color: #8aa0bd;
+    font-weight: 700;
+}
+
+.block_language .content ul li a {
+    font-family: 'Inter', 'Jakarta', sans-serif;
+    font-weight: 600;
+    color: #2e4a7a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.block_language .content ul li.current a {
+    color: #ff9200;
+    font-weight: 800;
+}
+
+/* ============================================================
+   Kartu Nama Jurnal (business card) di home page — tema terang
+   ============================================================ */
+.jemt-bcard {
+    margin: 2rem auto 0;
+    max-width: 480px;
+    border-radius: 18px;
+    overflow: hidden;
+    font-family: 'Inter', 'Jakarta', sans-serif;
+    color: #16263d;
+    background: linear-gradient(160deg, #ffffff 0%, #f0f5fc 100%);
+    border: 1px solid #e0e9f4;
+    box-shadow:
+        0 16px 40px rgba(22, 38, 61, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    position: relative;
+}
+
+.jemt-bcard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff9200 0%, #ffb84d 45%, #2e4a7a 100%);
+}
+
+/* Header kartu — logo sebagai background full-bleed */
+.jemt-bcard__header {
+    position: relative;
+    aspect-ratio: 997 / 229;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e4ecf6;
+}
+
+.jemt-bcard__header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://tridarma.id/public/journals/1/logo2tridarma.webp?v=2');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+}
+
+/* Badan kartu — baris data */
+.jemt-bcard__body {
+    padding: 2px 24px 2px;
+}
+
+.jemt-bcard__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 18px;
+    padding: 5px 0;
+    border-bottom: 1px solid #e9eff7;
+}
+
+.jemt-bcard__item:last-child {
+    border-bottom: none;
+}
+
+.jemt-bcard__label {
+    flex: 0 0 34%;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: #8aa0bd;
+}
+
+.jemt-bcard__value {
+    flex: 1 1 auto;
+    text-align: right;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #16263d;
+    word-break: break-word;
+}
+
+.jemt-bcard__value a {
+    color: #2e4a7a;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(46, 74, 122, 0.4);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.jemt-bcard__value a:hover {
+    color: #e06f00;
+    border-color: #ff9200;
+}
+
+/* Footer kartu — badge akreditasi */
+.jemt-bcard__footer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 5px;
+    padding: 7px 16px 9px;
+    background: #f4f8fd;
+    border-top: 1px solid #e4ecf6;
+}
+
+.jemt-bcard__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    color: #1b3354;
+    background: #ffffff;
+    border: 1px solid #dbe6f3;
+    box-shadow: 0 1px 4px rgba(22, 38, 61, 0.07);
+}
+
+.jemt-bcard__badge .fa {
+    color: #ff9200;
+    font-size: 0.78rem;
+}
+
+.jemt-bcard__badge .fa {
+    color: #ff9200;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+    .jemt-bcard__item {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .jemt-bcard__label {
+        flex: 1 1 auto;
+    }
+
+    .jemt-bcard__value {
+        text-align: left;
+    }
+
+    .jemt-bcard__header::after {
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .jemt-bcard__body {
+        padding: 2px 18px 2px;
+    }
+
+    .jemt-bcard__footer {
+        padding: 7px 18px 9px;
+    }
+}
+
+/* ============================================================
+   Section INDEXED di home page
+   ============================================================ */
+.jemt-indexed {
+    margin-top: 2rem;
+    width: 100%;
+    clear: both;
+}
+
+.jemt-indexed__header {
+    background: linear-gradient(90deg, #16263d 0%, #2e4a7a 100%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 3px solid #ff9200;
+    box-sizing: border-box;
+}
+
+.jemt-indexed__title {
+    font-family: 'Jakarta', 'Inter', sans-serif;
+    font-size: 18px !important;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 0 !important;
+    padding: 10px 20px;
+    line-height: 1.3;
+}
+
+.jemt-indexed__row {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    align-items: center;
+    gap: 5px;
+    padding: 8px 0;
+}
+
+.jemt-indexed__row + .jemt-indexed__row {
+    border-top: 1px solid #eef2f8;
+    padding-top: 8px;
+}
+
+.jemt-indexed__row img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.jemt-indexed__row a:hover img {
+    box-shadow: 0 4px 10px rgba(22, 38, 61, 0.25);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .jemt-indexed__row {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* ============================================================
+   Section Announcements 2 kolom di home page
+   ============================================================ */
+.jemt-announcements {
+    margin-top: 2rem;
+}
+
+/* Heading section umum (Announcements, Current Issue, dll) */
+.jemt-section-heading {
+    font-family: 'Jakarta', 'Inter', sans-serif;
+    font-size: 18px !important;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 0 0 16px !important;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #16263d 0%, #2e4a7a 100%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 3px solid #ff9200;
+    line-height: 1.3;
+}
+
+.jemt-announcements__heading {
+    font-family: 'Jakarta', 'Inter', sans-serif;
+    font-size: 18px !important;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 0 0 16px !important;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #16263d 0%, #2e4a7a 100%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 3px solid #ff9200;
+}
+
+.jemt-announcements__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.jemt-announcements__card {
+    background: #ffffff;
+    border: 1px solid #e0e9f4;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 22px rgba(22, 38, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.jemt-announcements__title {
+    font-family: 'Jakarta', 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #16263d !important;
+    margin: 0 0 6px !important;
+    line-height: 1.3;
+}
+
+.jemt-announcements__date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ff9200;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+}
+
+.jemt-announcements__summary {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #2c3e50;
+    flex: 1 1 auto;
+    text-align: justify;
+}
+
+.jemt-announcements__summary p {
+    margin: 0 0 12px;
+}
+
+.jemt-announcements__link {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-top: 12px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff !important;
+    background: linear-gradient(135deg, #ff9200 0%, #e06f00 100%);
+    box-shadow: 0 3px 8px rgba(255, 146, 0, 0.3);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.jemt-announcements__link:hover {
+    box-shadow: 0 5px 14px rgba(255, 146, 0, 0.45);
+    transform: translateY(-2px);
+    color: #fff !important;
+}
+
+@media (max-width: 800px) {
+    .jemt-announcements__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Pesan saat belum ada edisi terbit */
+.jemt-no-issue {
+    font-family: 'Inter', 'Jakarta', sans-serif;
+    font-size: 0.95rem;
+    color: #5a6b80;
+    padding: 14px 20px;
+    background: #f7fafd;
+    border: 1px dashed #c7d4e4;
+    border-radius: 10px;
+}
+
+/* Beri jarak atas section Current Issue dari Announcements */
+.current_issue {
+    margin-top: 2rem;
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet & Mobile (< 992px)
+   ============================================================ */
+@media (max-width: 991.98px) {
+
+    /* Reset kotak tengah: full width, tanpa margin/bayangan samping */
+    .pkp_structure_page {
+        max-width: 100%;
+        margin: 0 auto !important;
+        box-shadow: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .pkp_structure_content,
+    .pkp_structure_footer,
+    .pkp_head_wrapper,
+    .pkp_site_name_wrapper {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Header banner mobile: tinggi lebih pendek, cover penuh */
+    .pkp_structure_head {
+        min-height: 120px;
+        background-size: cover;
+        background-position: center center;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    /* Logo jangan terlalu besar di layar kecil */
+    .pkp_site_name .is_img img {
+        max-height: 80px !important;
+        margin: 0 auto;
+    }
+
+    /* Hilangkan glass bar navigasi di mobile; menu jadi drawer sederhana */
+    .pkp_navigation_primary_wrapper {
+        background: rgba(22, 38, 61, 0.97);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0.5rem 0.75rem !important;
+    }
+
+    .pkp_navigation_primary_row {
+        padding-top: 0;
+    }
+
+    /* Item menu mobile: teks putih, tidak uppercase berlebihan */
+    #navigationPrimary > li > a {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #fff;
+    }
+
+    /* Submenu mobile: tampil sebagai daftar turun (bukan hover dropdown) */
+    #navigationPrimary > li > ul {
+        display: block;
+        position: static;
+        transform: none !important;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0 0 0 1.25rem;
+        min-width: 0;
+        margin-top: 2px;
+    }
+
+    #navigationPrimary > li > ul li a {
+        color: #dbe4f2;
+        padding: 8px 12px;
+    }
+
+    /* Tombol Daftar/Login sidebar: hilangkan margin negatif di mobile */
+    .pkp_structure_sidebar {
+        margin-top: 0;
+    }
+
+    #customblock-chat-us,
+    #customblock-journal-template,
+    #customblock-recomended-tool,
+    #customblock-visitors,
+    .block_language,
+    .block_information {
+        margin-top: 0;
+    }
+
+    /* Jangan posisikan nav user absolut di mobile */
+    .pkp_navigation_user_wrapper {
+        position: static;
+        text-align: center;
+    }
+
+    .pkp_navigation_user {
+        justify-content: center;
+    }
+
+    /* Grid INDEXED: 3 kolom di tablet, 2 kolom di hp kecil */
+    .jemt-indexed__row {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .jemt-indexed__row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+    }
+
+    .jemt-indexed__title,
+    .jemt-section-heading,
+    .jemt-announcements__heading {
+        font-size: 15px !important;
+        padding: 8px 14px;
+    }
+
+    /* Kartu bisnis: font label/value sedikit mengecil agar pas layar sempit */
+    .jemt-bcard__label {
+        font-size: 0.68rem;
+        letter-spacing: 1px;
+    }
+
+    .jemt-bcard__value {
+        font-size: 0.85rem;
+    }
+
+    .jemt-bcard__badge {
+        font-size: 0.62rem;
+        padding: 2px 6px;
+        letter-spacing: 0;
+    }
+
+    .jemt-bcard__footer {
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 6px 10px 8px;
+    }
+
+    .jemt-announcements__grid {
+        gap: 14px;
+    }
+
+    .jemt-announcements__card {
+        padding: 16px;
+    }
+}
+
+/* Perbaiki performance iOS: jangan fixed attachment di layar sentuh */
+@media (max-width: 991.98px) {
+    html {
+        background-attachment: scroll;
+    }
+}

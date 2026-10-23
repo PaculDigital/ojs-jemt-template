@@ -1,0 +1,25 @@
+# Jangan commit file sistem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Log
+*.log
+
+# Kredensial (JANGAN pernah commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+config.inc.php
+
+# Backup sementara
+*.bak
+*.tmp
