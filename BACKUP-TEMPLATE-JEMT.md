@@ -172,6 +172,102 @@ https://tridarma.id/jemt/id/issue/archive  200
 
 ---
 
+## ⚠️ PENTING: Template bisa hilang saat container di-recreate
+
+Ada **dua lokasi berbeda** untuk menyimpan template, dan ini bedanya:
+
+| Komponen | Lokasi | Permanen? |
+|---|---|---|
+**CSS + 73 aset** | `/var/www/ojs/public/journals/1/` (volume `ojs_public`) | ✅ **YA** — aman selamanya |
+**Template TPL** | `/var/www/html/templates/frontend/pages/` | ❌ **TIDAK** — hilang saat recreate |
+
+### Kejadian apa yang bikin TPL hilang
+
+| Kejadian | CSS/aset | TPL |
+|---|---|---|
+`docker restart` | ✅ aman | ✅ aman |
+VPS reboot | ✅ aman | ✅ aman |
+`docker compose restart` | ✅ aman | ✅ aman |
+**`docker compose down` + `up`** | ✅ aman | ❌ **HILANG** |
+**Container di-recreate / upgrade OJS** | ✅ aman | ❌ **HILANG** |
+**Pindah server (export/import)** | ✅ aman | ❌ **HILANG** |
+
+Kalau TPL hilang, jurnal kembali memakai template **default OJS** (2.466 byte, 73 baris) — header banner hilang, hero hilang, layout kacau.
+
+### Tanda TPL hilang
+
+Homepage jadi polos: hanya judul teks, tanpa header banner gold, tanpa hero, tanpa kartu info jurnal. Cek penyebabnya:
+
+```bash
+docker exec ojs-ojs_web-1 md5sum /var/www/html/templates/frontend/pages/indexJournal.tpl
+# HARUS e9434581e0a11adee14411ea1ddecc27
+# Kalau beda atau file cuma 2.466 byte -> TPL sudah kembali ke default
+```
+
+### Cara pasang ulang TPL (30 detik)
+
+```bash
+# 1. Pasang template dari Git
+docker cp /opt/data/jemt-template/templates/indexJournal.tpl \
+  ojs-ojs_web-1:/var/www/html/templates/frontend/pages/indexJournal.tpl
+
+# 2. Clear cache
+docker exec -u root ojs-ojs_web-1 sh -c \
+  'rm -rf /var/www/html/cache/t_cache/* /var/www/html/cache/t_compile/*'
+
+# 3. Verifikasi
+docker exec ojs-ojs_web-1 md5sum \
+  /var/www/html/templates/frontend/pages/indexJournal.tpl
+# harus: e9434581e0a11adee14411ea1ddecc27
+```
+
+CSS **tidak perlu dipasang ulang** — dia di volume, tetap aman.
+
+### Cara membuat TPL permanen (opsional)
+
+Volume `ojs_templates` sudah disiapkan di VPS dan sudah berisi 13 file TPL.
+Compose file `/opt/data/services/ojs/docker-compose.yml` sudah diedit dengan mount:
+
+```yaml
+volumes:
+  - ojs_public:/var/www/ojs/public
+  - ojs_files:/var/www/ojs/files
+  - ojs_templates:/var/www/html/templates/frontend/pages   # <- TPL persisten
+```
+
+**Tapi mount ini BELUM aktif** karena container belum di-recreate, dan `docker compose` tidak terpasang di VPS ini.
+
+Untuk mengaktifkannya, recreate container dengan mount baru (butuh downtime ±1 menit):
+
+```bash
+# Backup dulu
+docker inspect ojs-ojs_web-1 > /opt/data/ojs-web-inspect-backup.json
+
+# Stop, hapus, jalankan ulang dengan volume
+docker stop ojs-ojs_web-1
+docker rename ojs-ojs_web-1 ojs-ojs_web-1-OLD
+
+docker run -d --name ojs-ojs_web-1 \
+  --network ojs_ojs_net \
+  --restart unless-stopped \
+  -p 8080:80 \
+  -e OJS_DB_HOST=ojs_db \
+  -e OJS_DB_PORT=3306 \
+  -e OJS_DB_USERNAME=ojs \
+  -e OJS_DB_PASSWORD=<lihat .env> \
+  -e OJS_DB_NAME=ojs \
+  -e ALLOW_OVERRIDE=All \
+  -e OJS_REQUIRESSL=false \
+  -v ojs_ojs_public:/var/www/ojs/public \
+  -v ojs_ojs_files:/var/www/ojs/files \
+  -v ojs_templates:/var/www/html/templates/frontend/pages \
+  pkpofficial/ojs:3_5_0-5
+```
+
+**Alternatif lebih aman tanpa recreate:** cukup andalkan prosedur pemulihan di atas setiap kali container dibuat ulang. TPL selalu ada di Git, jadi tidak akan hilang permanen.
+
+---
+
 ## Struktur Tampilan (2 Gambar Terpisah)
 
 Desain JEMT memakai **dua gambar header terpisah** — jangan disatukan:
