@@ -40,7 +40,7 @@
 			</div>
 			<div class="jemt-bcard__item">
 				<span class="jemt-bcard__label">Frequency</span>
-				<span class="jemt-bcard__value">Terbit 6 kali dalam setahun</span>
+				<span class="jemt-bcard__value">{if $currentLocale eq 'en'}Published 6 times a year{else}Terbit 6 kali dalam setahun{/if}</span>
 			</div>
 			<div class="jemt-bcard__item">
 				<span class="jemt-bcard__label">Chief Editor</span>
@@ -97,18 +97,18 @@
 		<h2 class="jemt-announcements__heading">Announcements</h2>
 		<div class="jemt-announcements__grid">
 			<article class="jemt-announcements__card">
-				<h3 class="jemt-announcements__title">Informasi Tentang LoA JEMT</h3>
+				<h3 class="jemt-announcements__title">{if $currentLocale eq 'en'}Information About JEMT LoA{else}Informasi Tentang LoA JEMT{/if}</h3>
 				<div class="jemt-announcements__date">2026-08-17</div>
 				<div class="jemt-announcements__summary">
-					<p>Untuk mengecek keaslian LoA yang dikeluarkan <strong>Jurnal Ekonomi dan Manajemen Tridarma (JEMT)</strong> dapat dilakukan pengecekan <strong>keaslian LoA</strong> dengan <em><strong>scan barcode</strong></em> yang tertera di LoA atau <strong>link verifikasi</strong> yang tertera. Selain itu dapat juga dilakukan pengecekan pada laman <strong>Veifikasi LoA</strong> dengan menginput nomor LoA. Pastikan data yang ditampilkan sesuai dengan yang tertera di halaman hasil verifikasi. Seluruh LoA dapat diverifikasi, LoA yang tidak dapat diverifikasi bukan berasal dari kami dan tidak menjadi tanggung jawab kami. Harap berhati-hati.</p>
+					{if $currentLocale eq 'en'}<p>To check the authenticity of an LoA issued by <strong>Jurnal Ekonomi dan Manajemen Tridarma (JEMT)</strong>, its authenticity can be verified by <em><strong>scanning the barcode</strong></em> printed on the LoA or through the <strong>verification link</strong> provided. Verification can also be carried out on the <strong>LoA Verification</strong> page by entering the LoA number. Make sure the data displayed matches the data shown on the verification result page. All LoAs can be verified; an LoA that cannot be verified was not issued by us and is not our responsibility. Please be careful.</p>{else}<p>Untuk mengecek keaslian LoA yang dikeluarkan <strong>Jurnal Ekonomi dan Manajemen Tridarma (JEMT)</strong> dapat dilakukan pengecekan <strong>keaslian LoA</strong> dengan <em><strong>scan barcode</strong></em> yang tertera di LoA atau <strong>link verifikasi</strong> yang tertera. Selain itu dapat juga dilakukan pengecekan pada laman <strong>Veifikasi LoA</strong> dengan menginput nomor LoA. Pastikan data yang ditampilkan sesuai dengan yang tertera di halaman hasil verifikasi. Seluruh LoA dapat diverifikasi, LoA yang tidak dapat diverifikasi bukan berasal dari kami dan tidak menjadi tanggung jawab kami. Harap berhati-hati.</p>{/if}
 				</div>
 				<a href="https://tridarma.id/jemt/en/announcement" class="jemt-announcements__link">Read More</a>
 			</article>
 			<article class="jemt-announcements__card">
-				<h3 class="jemt-announcements__title">Informasi Focus dan Scope</h3>
+				<h3 class="jemt-announcements__title">{if $currentLocale eq 'en'}Focus and Scope Information{else}Informasi Focus dan Scope{/if}</h3>
 				<div class="jemt-announcements__date">2026-08-20</div>
 				<div class="jemt-announcements__summary">
-					<p>Jurnal Ekonomi dan Manajemen Tridarma (JEMT) merupakan jurnal ilmiah yang berfokus pada publikasi hasil penelitian, kajian teoretis, serta pemikiran konseptual dalam bidang ekonomi dan manajemen. Jurnal ini hadir sebagai wadah akademik bagi peneliti, dosen, praktisi, dan mahasiswa untuk menyebarluaskan gagasan serta temuan ilmiah yang berkontribusi terhadap pengembangan ilmu pengetahuan dan praktik profesional.</p>
+					{if $currentLocale eq 'en'}<p>Jurnal Ekonomi dan Manajemen Tridarma (JEMT) is a scholarly journal focusing on the publication of research results, theoretical studies, and conceptual thinking in the fields of economics and management. This journal serves as an academic forum for researchers, lecturers, practitioners, and students to disseminate ideas and scholarly findings that contribute to the advancement of knowledge and professional practice.</p>{else}<p>Jurnal Ekonomi dan Manajemen Tridarma (JEMT) merupakan jurnal ilmiah yang berfokus pada publikasi hasil penelitian, kajian teoretis, serta pemikiran konseptual dalam bidang ekonomi dan manajemen. Jurnal ini hadir sebagai wadah akademik bagi peneliti, dosen, praktisi, dan mahasiswa untuk menyebarluaskan gagasan serta temuan ilmiah yang berkontribusi terhadap pengembangan ilmu pengetahuan dan praktik profesional.</p>{/if}
 				</div>
 				<a href="https://tridarma.id/jemt/en/FocusAndScope" class="jemt-announcements__link">Read More &gt;</a>
 			</article>

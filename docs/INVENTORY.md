@@ -6,7 +6,7 @@ Daftar lengkap 108 file dalam repository ini.
 
 | Kategori | Jumlah | Ukuran |
 |---|---|---|
-| CSS stylesheet | 1 | 29.649 B |
+| CSS stylesheet | 1 | 31.403 B |
 | Template homepage (.tpl) | 1 | 7.406 B |
 | Template naskah (.docx) | 1 | 3.3 MB |
 | Font (.woff2) | 4 | — |
@@ -26,7 +26,7 @@ Daftar lengkap 108 file dalam repository ini.
 
 | File | Ukuran | Keterangan |
 |---|---|---|
-| `styleSheet.css` | 29.649 B | CSS custom utama, 11 @media query |
+| `styleSheet.css` | 31.403 B | CSS custom utama, 12 @media query |
 | `Template-JEMT-2026.docx` | 3.330.984 B | Template naskah penulis |
 | `hero_2026.webp` | 39.832 B | Banner hero (webp, dipakai) |
 | `hero_2026.png` | 562.159 B | Banner hero (png, fallback) |

@@ -1242,3 +1242,41 @@ a:hover { color: #FF9200; }
         background-attachment: scroll;
     }
 }
+/* ============================================================
+   PENYESUAIAN HEADER — perintah Boss 23 Okt 2026 (di atas CSS asli):
+   baris menu utama (glass bar) dibuat full selebar kotak halaman
+   (kanan-kiri mentok) dan dirampingkan tingginya.
+   ============================================================ */
+.pkp_head_wrapper{padding-left:0 !important;padding-right:0 !important;}
+.pkp_navigation_primary_row{padding-left:0 !important;padding-right:0 !important;margin-left:0 !important;margin-right:0 !important;}
+.pkp_structure_head .pkp_navigation_primary_wrapper{width:100% !important;max-width:100% !important;border-radius:10px;}
+@media (min-width: 992px){
+    .pkp_navigation_primary_wrapper{padding-left:2px !important;padding-right:2px !important;}
+    .pkp_navigation_primary > li > a{padding-top:4px !important;padding-bottom:4px !important;}
+}
+
+/* ============================================================
+   OUTLINE LOGO SIDEBAR V3 — perintah Boss 23 Okt 2026:
+   outline tipis abu-abu TETAP pada gambar logo (Chat Us,
+   Journal Template, Recommended Tool); efek hover yang
+   MENGIKUTI outline gambar: kotak tautan dibuat rapat persis
+   memeluk gambar, sehingga bayangan hover jatuh tepat
+   mengelilingi outline gambar, tidak meleset.
+   ============================================================ */
+#customblock-chat-us .badan a,
+#customblock-journal-template .badan a,
+#customblock-recomended-tool .badan a{
+    display:block;
+    padding:0;
+    line-height:0;
+    font-size:0;
+    border:none;
+    border-radius:14px;
+}
+#customblock-chat-us .badan img,
+#customblock-journal-template .badan img,
+#customblock-recomended-tool .badan img{
+    display:block;
+    border:1px solid #d8dde4;
+    box-sizing:border-box;
+}

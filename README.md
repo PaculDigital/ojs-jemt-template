@@ -16,7 +16,7 @@ Repository ini berisi **semua file yang dibutuhkan** untuk membangun tampilan ju
 | **OJS** | 3.5.0-5 LTS |
 | **E-ISSN** | 3163-608X |
 | **DOI Prefix** | 10.64788 |
-| **Penerbit** | Universitas Pelita Bangsa |
+| **Penerbit** | Tridarma Journal Publishing |
 | **Theme** | `default` + override `indexJournal.tpl` + custom `styleSheet.css` |
 
 ---
@@ -25,7 +25,7 @@ Repository ini berisi **semua file yang dibutuhkan** untuk membangun tampilan ju
 
 ```
 public/journals/1/          ← aset yang di-serve OJS (taruh di sini)
-├── styleSheet.css          ← CSS custom (29.649 bytes, 11 @media)
+├── styleSheet.css          ← CSS custom (31.403 bytes, 12 @media)
 ├── indexJournal.tpl        ← (lihat templates/) template homepage custom
 ├── hero_2026.webp / .png   ← banner hero
 ├── header_banner.png
@@ -103,9 +103,9 @@ Jadi `indexJournal.tpl` di `/var/www/html/templates/` **rawan hilang**. Setelah 
 ## Spesifikasi Desain
 
 - **Font**: Inter (400, 700) + Plus Jakarta Sans (600, 800)
-- **CSS**: 29.649 bytes, 11 media query (responsive)
+- **CSS**: 31.403 bytes, 12 media query (responsive)
 - **Warna aksen**: lihat variabel di `styleSheet.css`
-- **Template homepage**: custom `indexJournal.tpl` (7.406 bytes) dengan class `jemt-bcard`
+- **Template homepage**: custom `indexJournal.tpl` (8.701 bytes, dwibahasa ID/EN) dengan class `jemt-bcard`
 - **Format gambar**: `.webp` (utama, ringan) + `.png` (fallback)
 
 ---
@@ -131,6 +131,7 @@ Jadi `indexJournal.tpl` di `/var/www/html/templates/` **rawan hilang**. Setelah 
 | 2026-08-20 | Backup final (CSS 29.649 bytes) |
 | 2026-08-21 | Package lengkap dengan fonts + indexed + sidebar |
 | 2026-10-23 | Aset hilang dari volume setelah patch PHP CVE; repository ini dibuat sebagai sumber pemulihan permanen |
+| 2026-10-23 (malam) | Template dipulihkan ke live dari repo ini; CSS final (penyesuaian header + outline logo sidebar); template beranda dwibahasa; konten database versi English dipasang (lihat `database-en/`); repo diperbarui menyamai keadaan live |
 
 ---
 
